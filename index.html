@@ -160,6 +160,12 @@
   <!-- Section 1: Hero avec mockup -->
   <section class="hero" id="hero">
     <div class="hero__depth" id="heroDepth" aria-hidden="true">
+      <div class="hero__aurora" aria-hidden="true">
+        <span class="hero__aurora-blob hero__aurora-blob--1"></span>
+        <span class="hero__aurora-blob hero__aurora-blob--2"></span>
+        <span class="hero__aurora-blob hero__aurora-blob--3"></span>
+      </div>
+      <div class="hero__depth-grid"></div>
       <div class="hero__depth-mesh"></div>
       <div class="hero__depth-glow"></div>
       <div class="hero__particles" id="heroParticles"></div>
@@ -228,7 +234,13 @@
     <div class="hero__floats-mobile" id="heroFloatsMobile" aria-hidden="true"></div>
 
     <div class="hero__device-wrap" id="heroDevice" data-hero-device>
+      <div class="hero__orbit" aria-hidden="true">
+        <span class="hero__orbit-ring"></span>
+        <span class="hero__orbit-dot hero__orbit-dot--1"></span>
+        <span class="hero__orbit-dot hero__orbit-dot--2"></span>
+      </div>
       <div class="hero__device-glow" id="heroDeviceGlow" data-hero-parallax="glow" aria-hidden="true"></div>
+      <div class="hero__device-glow hero__device-glow--accent" aria-hidden="true"></div>
 
       <div class="hero__parallax-item hero__parallax-item--live" data-hero-parallax="card-live" hidden>
       <aside class="hero__live-card float-card hero__reveal" style="--hero-delay: 0.65s" aria-label="Vos stats cette semaine">
@@ -316,6 +328,8 @@
       <div class="hero__phone-stage" data-hero-parallax="phone">
       <div class="phone-mockup phone-mockup--hero" id="heroPhone">
         <div class="phone-mockup__frame">
+          <div class="phone-mockup__shine" aria-hidden="true"></div>
+          <div class="phone-mockup__rim" aria-hidden="true"></div>
           <div class="phone-mockup__notch"></div>
           <div class="phone-mockup__screen">
             <div class="app-ui" id="landingPhoneUi">

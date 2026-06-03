@@ -12,25 +12,23 @@
   const deviceWrap = document.getElementById('heroDevice');
   const phoneStage = hero.querySelector('[data-hero-parallax="phone"]');
   const phone = document.getElementById('heroPhone');
-  const phoneFrame = phone?.querySelector('.phone-mockup__frame');
   const deviceGlow = document.getElementById('heroDeviceGlow');
   const particlesRoot = document.getElementById('heroParticles');
   const contentLayer = hero.querySelector('[data-hero-parallax="content"]');
   const cardLayers = hero.querySelectorAll('.hero__parallax-item');
-  const quotesTrack = document.getElementById('heroQuotesTrack');
   const quotesDots = document.getElementById('heroQuotesDots');
   const interactiveCards = document.getElementById('heroInteractiveCards');
   const hoverCards = interactiveCards?.querySelectorAll('.hero-hover-card') || [];
 
   const DEPTH = {
-    content: { tx: 10, ty: 6, tz: 0, rx: 0.4, ry: 0.6, scroll: -0.06 },
-    glow: { tx: 14, ty: 10, tz: 0, rx: 0, ry: 0, scroll: -0.08 },
-    phone: { tx: 22, ty: 16, tz: 24, rx: 7, ry: 9, scroll: -0.14 },
-    'card-1': { tx: 38, ty: 28, tz: 36, rx: 4, ry: 6, scroll: -0.1 },
-    'card-2': { tx: 48, ty: 32, tz: 44, rx: 5, ry: 7, scroll: -0.12 },
-    'card-3': { tx: 34, ty: 26, tz: 32, rx: 3.5, ry: 5.5, scroll: -0.09 },
-    'card-4': { tx: 42, ty: 30, tz: 40, rx: 4.5, ry: 6.5, scroll: -0.11 },
-    'card-live': { tx: 52, ty: 34, tz: 48, rx: 5, ry: 8, scroll: -0.13 },
+    content: { tx: 12, ty: 8, tz: 0, rx: 0.35, ry: 0.5, scroll: -0.05, idle: 0.4 },
+    glow: { tx: 18, ty: 12, tz: 0, rx: 0, ry: 0, scroll: -0.1, idle: 0.25 },
+    phone: { tx: 26, ty: 18, tz: 32, rx: 0, ry: 0, scroll: -0.16, idle: 0.55 },
+    'card-1': { tx: 44, ty: 30, tz: 42, rx: 5, ry: 7, scroll: -0.11, idle: 1, phase: 0 },
+    'card-2': { tx: 54, ty: 36, tz: 52, rx: 6, ry: 8, scroll: -0.13, idle: 1.15, phase: 1.2 },
+    'card-3': { tx: 40, ty: 28, tz: 38, rx: 4.5, ry: 6.5, scroll: -0.1, idle: 0.9, phase: 2.4 },
+    'card-4': { tx: 48, ty: 32, tz: 46, rx: 5.5, ry: 7.5, scroll: -0.12, idle: 1.05, phase: 3.6 },
+    'card-live': { tx: 58, ty: 38, tz: 56, rx: 6, ry: 9, scroll: -0.14, idle: 1.2, phase: 0.8 },
   };
 
   const parallaxLayers = hero.querySelectorAll('[data-hero-parallax]');
@@ -48,20 +46,21 @@
   refreshMode();
   window.addEventListener('resize', refreshMode, { passive: true });
 
-  /* Particules vertes + bleues */
+  /* Particules — plus de profondeur */
   if (particlesRoot && parallaxEnabled) {
-    const count = mobileMode ? 0 : window.innerWidth < 1200 ? 22 : 36;
+    const count = mobileMode ? 0 : window.innerWidth < 1200 ? 28 : 48;
     for (let i = 0; i < count; i += 1) {
       const p = document.createElement('span');
-      const isBlue = i % 3 === 0;
-      p.className = `hero__particle ${isBlue ? 'hero__particle--blue' : 'hero__particle--green'}`;
-      p.style.left = `${Math.random() * 100}%`;
+      const isBlue = i % 4 === 0;
+      const isLarge = i % 7 === 0;
+      p.className = `hero__particle ${isBlue ? 'hero__particle--blue' : 'hero__particle--green'}${isLarge ? ' hero__particle--lg' : ''}`;
+      p.style.left = `${8 + Math.random() * 84}%`;
       p.style.top = `${Math.random() * 100}%`;
-      p.style.animationDelay = `${Math.random() * 10}s`;
-      p.style.animationDuration = `${12 + Math.random() * 16}s`;
-      p.style.opacity = `${0.06 + Math.random() * 0.12}`;
-      const size = 1.5 + Math.random() * 2.5;
+      p.style.animationDelay = `${Math.random() * 12}s, ${Math.random() * 4}s`;
+      p.style.animationDuration = `${14 + Math.random() * 18}s, ${3 + Math.random() * 3}s`;
+      const size = isLarge ? 3.5 + Math.random() * 2 : 1.5 + Math.random() * 2.5;
       p.style.width = p.style.height = `${size}px`;
+      p.style.opacity = `${0.08 + Math.random() * 0.14}`;
       particlesRoot.appendChild(p);
     }
   }
@@ -71,6 +70,8 @@
   let currentX = 0;
   let currentY = 0;
   let scrollY = 0;
+  let time = 0;
+
   function onMouseMove(e) {
     if (!mouseEnabled) return;
     const rect = hero.getBoundingClientRect();
@@ -87,76 +88,90 @@
     const rect = hero.getBoundingClientRect();
     const h = Math.max(rect.height, 1);
     const progress = Math.min(1, Math.max(0, -rect.top / h));
-    scrollY = progress * h * 0.35;
+    scrollY = progress * h * 0.38;
     hero.style.setProperty('--hero-scroll', String(scrollY));
-    const glowScale = 1 + progress * 0.12 + (mouseEnabled ? Math.abs(currentX) * 0.06 : 0);
+    const glowScale = 1 + progress * 0.14 + (mouseEnabled ? Math.abs(currentX) * 0.08 : 0);
     hero.style.setProperty('--hero-glow-scale', String(glowScale));
   }
 
-  function applyLayer(el, cfg, mx, my, sy) {
-    if (!cfg) return;
-    const px = mx * cfg.tx;
-    const py = my * cfg.ty + sy * cfg.scroll;
-    const rz = mx * cfg.ry;
-    const rx = -my * cfg.rx;
-    el.style.transform = `translate3d(${px}px, ${py}px, ${cfg.tz}px) rotateX(${rx}deg) rotateY(${rz}deg)`;
+  function idleOffset(cfg, t) {
+    const amp = cfg.idle || 0.8;
+    const ph = cfg.phase || 0;
+    return {
+      x: Math.sin(t * 0.55 + ph) * amp * 0.012,
+      y: Math.cos(t * 0.48 + ph * 1.1) * amp * 0.01,
+      z: Math.sin(t * 0.35 + ph) * amp * 2.5,
+    };
   }
 
-  function applyPhone(mx, my, sy) {
+  function applyLayer(el, cfg, mx, my, sy, t) {
+    if (!cfg) return;
+    const idle = idleOffset(cfg, t);
+    const px = mx * cfg.tx + idle.x * 40;
+    const py = my * cfg.ty + sy * cfg.scroll + idle.y * 40;
+    const tz = cfg.tz + idle.z;
+    const rz = mx * cfg.ry + idle.x * 3;
+    const rx = -my * cfg.rx + idle.y * 2;
+    el.style.transform = `translate3d(${px}px, ${py}px, ${tz}px) rotateX(${rx}deg) rotateY(${rz}deg)`;
+  }
+
+  function applyPhone(mx, my, sy, t) {
     const cfg = DEPTH.phone;
-    const px = mx * cfg.tx;
-    const py = my * cfg.ty + sy * cfg.scroll;
-    const rotY = -8 + mx * cfg.ry;
-    const rotX = 4 - my * cfg.rx;
+    const idle = idleOffset(cfg, t);
+    const px = mx * cfg.tx + idle.x * 30;
+    const py = my * cfg.ty + sy * cfg.scroll + idle.y * 30;
 
     if (phoneStage) {
-      phoneStage.style.transform = `translate3d(${px * 0.35}px, ${py * 0.4}px, ${cfg.tz}px)`;
-    }
-    if (phoneFrame) {
-      phoneFrame.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg)`;
-    } else if (phone) {
-      phone.style.transform = `translate3d(${px}px, ${py}px, 0) rotateY(${rotY}deg) rotateX(${rotX}deg)`;
+      phoneStage.style.transform = `translate3d(${px * 0.4}px, ${py * 0.45}px, ${cfg.tz + idle.z}px)`;
     }
   }
 
-  function tick() {
+  function tick(now) {
     if (!parallaxEnabled) return;
 
-    const lerp = mouseEnabled ? 0.07 : 0.12;
+    const dt = Math.min(0.05, (now - (tick.last || now)) / 1000);
+    tick.last = now;
+    time += dt;
+
+    const lerp = mouseEnabled ? 0.048 : 0.1;
     currentX += (targetX - currentX) * lerp;
     currentY += (targetY - currentY) * lerp;
 
-    const mx = mouseEnabled ? currentX : 0;
-    const my = mouseEnabled ? currentY : 0;
+    const idleX = Math.sin(time * 0.45) * 0.018;
+    const idleY = Math.cos(time * 0.38) * 0.014;
+    const mx = mouseEnabled ? currentX + idleX : idleX;
+    const my = mouseEnabled ? currentY + idleY : idleY;
 
     hero.style.setProperty('--hero-mx', String(mx));
     hero.style.setProperty('--hero-my', String(my));
-    hero.style.setProperty('--hero-glow-shift-x', `${mx * 28}px`);
-    hero.style.setProperty('--hero-glow-shift-y', `${my * 18 - scrollY * 0.15}px`);
+    hero.style.setProperty('--hero-glow-shift-x', `${mx * 32}px`);
+    hero.style.setProperty('--hero-glow-shift-y', `${my * 20 - scrollY * 0.18}px`);
+    hero.style.setProperty('--hero-shine-x', `${50 + mx * 28}%`);
+    hero.style.setProperty('--hero-shine-y', `${32 + my * 22}%`);
+    hero.style.setProperty('--hero-orbit-rot', `${time * 14}deg`);
 
     if (mobileMode) {
       const sy = scrollY;
       if (contentLayer) contentLayer.style.transform = `translate3d(0, ${-sy * 0.05}px, 0)`;
-      if (phoneStage) phoneStage.style.transform = `translate3d(0, ${-sy * 0.18}px, 0)`;
+      if (phoneStage) phoneStage.style.transform = `translate3d(0, ${-sy * 0.2}px, 0)`;
       cardLayers.forEach((el, i) => {
-        const factor = 0.08 + i * 0.02;
+        const factor = 0.09 + i * 0.025;
         el.style.transform = `translate3d(0, ${-sy * factor}px, 0)`;
       });
-      if (phoneFrame) phoneFrame.style.transform = 'rotateY(-6deg) rotateX(3deg)';
       return;
     }
 
     parallaxLayers.forEach((el) => {
       const key = el.getAttribute('data-hero-parallax');
       if (key === 'phone' || key === 'glow') return;
-      applyLayer(el, DEPTH[key], mx, my, scrollY);
+      applyLayer(el, DEPTH[key], mx, my, scrollY, time);
     });
 
-    applyPhone(mx, my, scrollY);
+    applyPhone(mx, my, scrollY, time);
 
     if (deviceWrap) {
-      deviceWrap.style.setProperty('--hero-px', `${mx * 6}px`);
-      deviceWrap.style.setProperty('--hero-py', `${my * 4 - scrollY * 0.08}px`);
+      deviceWrap.style.setProperty('--hero-px', `${mx * 8}px`);
+      deviceWrap.style.setProperty('--hero-py', `${my * 5 - scrollY * 0.1}px`);
     }
   }
 
@@ -167,9 +182,9 @@
     updateScroll();
 
     let running = true;
-    const loop = () => {
+    const loop = (now) => {
       if (!running) return;
-      tick();
+      tick(now);
       requestAnimationFrame(loop);
     };
     requestAnimationFrame(loop);

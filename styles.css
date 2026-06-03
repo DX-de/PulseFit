@@ -1264,10 +1264,7 @@ body.nav-is-authed [data-nav-auth-user] {
   transform: rotateY(-8deg) rotateX(4deg);
   transition: box-shadow 0.45s var(--ease);
 }
-#hero.hero--parallax-active .phone-mockup--hero .phone-mockup__frame {
-  transition: box-shadow 0.45s var(--ease);
-}
-.hero__device-wrap.is-hovered .phone-mockup--hero .phone-mockup__frame {
+#hero:not(.hero--parallax-active) .hero__device-wrap.is-hovered .phone-mockup--hero .phone-mockup__frame {
   transform: rotateY(-4deg) rotateX(2deg);
   box-shadow:
     0 0 0 2px rgba(255,255,255,0.1),
