@@ -1,0 +1,110 @@
+/**
+ * PulseFit — Finitions landing (sans changer la structure ni les couleurs)
+ */
+
+/* Hero */
+#hero .hero__title {
+  text-shadow: 0 0 60px rgba(34, 197, 94, 0.15);
+}
+
+#hero .btn--primary.btn--glow {
+  animation: landingCtaGlow 3.5s ease-in-out infinite;
+}
+
+@keyframes landingCtaGlow {
+  0%, 100% {
+    box-shadow: 0 0 24px rgba(34, 197, 94, 0.35), 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(34, 197, 94, 0.55), 0 8px 28px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* Sections */
+.section-header h2 {
+  letter-spacing: -0.02em;
+}
+
+.section-tag {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.12);
+}
+
+/* Cartes & pricing */
+.price-card,
+.landing-feature-card,
+.use-case-card,
+.testimonial-card,
+.screen-card__inner {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease,
+    box-shadow 0.4s ease;
+}
+
+.price-card:hover,
+.landing-feature-card:hover,
+.use-case-card:hover {
+  transform: translateY(-6px);
+}
+
+.price-card.featured {
+  box-shadow: 0 0 48px rgba(34, 197, 94, 0.15);
+}
+
+.price-card.featured:hover {
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4), 0 0 56px rgba(34, 197, 94, 0.22);
+}
+
+/* FAQ */
+.faq-item {
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.faq-item[open] {
+  border-color: rgba(34, 197, 94, 0.3);
+  background: rgba(34, 197, 94, 0.04);
+}
+
+/* CTA final */
+.cta-final {
+  position: relative;
+}
+
+.cta-final::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 100%, rgba(34, 197, 94, 0.12) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+/* Daily loop / métriques */
+.daily-loop__card,
+.metric-card,
+.why-card {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
+}
+
+.daily-loop__card:hover,
+.metric-card:hover,
+.why-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(34, 197, 94, 0.28);
+}
+
+/* Scroll fluide sections */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #hero .btn--primary.btn--glow {
+    animation: none;
+  }
+
+  .price-card:hover,
+  .landing-feature-card:hover,
+  .use-case-card:hover {
+    transform: none;
+  }
+}

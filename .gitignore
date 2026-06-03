@@ -1,0 +1,9 @@
+.DS_Store
+.vercel
+.netlify
+node_modules/
+js/config.js
+.env
+.env.*
+*.log
+.cursor/

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulseFit — Connexion</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../app/auth.css">
+</head>
+<body class="auth-page" data-theme="dark">
+  <div class="noise" aria-hidden="true"></div>
+  <div class="glow-orb glow-orb--green" aria-hidden="true"></div>
+  <a href="../index.html" class="auth-back">← Accueil</a>
+  <main class="auth-card">
+    <div class="auth-brand">
+      <img src="../assets/logo-128.png" class="pf-brand-logo pf-brand-logo--auth" width="48" height="48" alt="">
+      <h1>PulseFit</h1>
+      <p class="auth-tag">Connexion sécurisée · Supabase Auth</p>
+    </div>
+    <div class="auth-oauth">
+      <button type="button" data-oauth="google">G Continuer avec Google</button>
+      <button type="button" data-oauth="apple"> Continue avec Apple</button>
+    </div>
+    <div class="auth-divider">ou email</div>
+    <form class="auth-form" id="loginForm">
+      <label>Email<input type="email" name="email" required autocomplete="email" placeholder="vous@exemple.com"></label>
+      <label>Mot de passe<input type="password" name="password" required autocomplete="current-password" placeholder="••••••••"></label>
+      <p class="auth-error" id="loginError" hidden></p>
+      <button type="submit" class="btn btn--primary btn--block btn--glow">Se connecter</button>
+    </form>
+    <p style="text-align:center;margin-top:12px"><a href="../forgot-password/" style="color:var(--gray-light);font-size:0.85rem">Mot de passe oublié ?</a></p>
+    <p class="auth-footer">Pas de compte ? <a href="../register/">Créer un compte</a></p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../pulsefit-store.js"></script>
+  <script src="../js/pulsefit-cloud.js"></script>
+  <script src="../pulsefit-auth.js"></script>
+  <script src="../js/auth-ui.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const btn = e.target.querySelector('button[type=submit]');
+      btn.disabled = true;
+      const res = await PulseFitAuth.login(fd.get('email'), fd.get('password'));
+      btn.disabled = false;
+      if (!res.ok) { PFAuth.showError('loginError', res.error); return; }
+      try { await PulseFitStore.init(); } catch (err) { console.warn(err); }
+      PFAuth.goNext();
+    });
+  </script>
+</body>
+</html>

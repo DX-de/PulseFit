@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulseFit — Inscription</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../app/auth.css">
+</head>
+<body class="auth-page" data-theme="dark">
+  <div class="noise" aria-hidden="true"></div>
+  <div class="glow-orb glow-orb--blue" aria-hidden="true"></div>
+  <a href="../login/" class="auth-back">← Connexion</a>
+  <main class="auth-card">
+    <div class="auth-brand">
+      <h1>Créer un compte</h1>
+      <p class="auth-tag">Rejoignez PulseFit · Sync Supabase</p>
+    </div>
+    <div class="auth-oauth">
+      <button type="button" data-oauth="google">G Google</button>
+      <button type="button" data-oauth="apple"> Apple</button>
+    </div>
+    <div class="auth-divider">ou</div>
+    <form class="auth-form" id="registerForm">
+      <label>Prénom<input type="text" name="firstName" required></label>
+      <label>Nom<input type="text" name="lastName"></label>
+      <label>Email<input type="email" name="email" required autocomplete="email"></label>
+      <label>Mot de passe (6+ car.)<input type="password" name="password" required minlength="6"></label>
+      <p class="auth-error" id="regError" hidden></p>
+      <button type="submit" class="btn btn--primary btn--block btn--glow">S'inscrire</button>
+    </form>
+    <p class="auth-footer">Déjà inscrit ? <a href="../login/">Se connecter</a></p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../pulsefit-store.js"></script>
+  <script src="../js/pulsefit-cloud.js"></script>
+  <script src="../pulsefit-auth.js"></script>
+  <script src="../js/auth-ui.js"></script>
+  <script>
+    if (!window.PulseFitSupabase?.isConfigured?.()) {
+      const msg = window.PulseFitSupabase?.configError?.() || 'js/config.js manquant ou invalide.';
+      console.error('PulseFit Supabase:', msg, window.PulseFitConfig);
+    }
+
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const btn = e.target.querySelector('button[type=submit]');
+      btn.disabled = true;
+      const res = await PulseFitAuth.register({
+        email: fd.get('email'),
+        password: fd.get('password'),
+        firstName: fd.get('firstName'),
+        lastName: fd.get('lastName'),
+      });
+      btn.disabled = false;
+      if (!res.ok) { PFAuth.showError('regError', res.error); return; }
+      if (res.needsEmailConfirm) {
+        PFAuth.showError('regError', 'Vérifiez votre email pour confirmer le compte, puis connectez-vous.');
+        return;
+      }
+      try { await PulseFitStore.init(); } catch (err) { console.warn(err); }
+      location.href = '../dashboard/';
+    });
+  </script>
+</body>
+</html>

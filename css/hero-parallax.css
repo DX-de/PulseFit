@@ -1,0 +1,221 @@
+/**
+ * PulseFit — Hero parallax 3D (landing #hero uniquement)
+ */
+
+#hero {
+  --hero-mx: 0;
+  --hero-my: 0;
+  --hero-scroll: 0;
+  --hero-glow-scale: 1;
+  --hero-glow-shift-x: 0px;
+  --hero-glow-shift-y: 0px;
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+
+#hero.hero--parallax-off {
+  perspective: none;
+}
+
+/* Fond profondeur */
+.hero__depth {
+  position: absolute;
+  inset: -8% -4%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  transform: translate3d(
+    calc(var(--hero-mx) * -18px),
+    calc(var(--hero-my) * -12px + var(--hero-scroll) * 0.08px),
+    0
+  );
+  will-change: transform;
+}
+
+.hero__depth-mesh {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 45% at 22% 38%, rgba(34, 197, 94, 0.14) 0%, transparent 62%),
+    radial-gradient(ellipse 48% 40% at 78% 62%, rgba(59, 130, 246, 0.1) 0%, transparent 58%),
+    radial-gradient(ellipse 70% 50% at 50% 100%, rgba(34, 197, 94, 0.06) 0%, transparent 55%);
+  opacity: 0.9;
+  transform: translate3d(
+    calc(var(--hero-mx) * 24px),
+    calc(var(--hero-my) * 16px),
+    0
+  ) scale(calc(1 + var(--hero-scroll) * 0.0004));
+}
+
+.hero__depth-glow {
+  position: absolute;
+  left: 58%;
+  top: 52%;
+  width: min(520px, 90vw);
+  height: min(420px, 70vh);
+  transform: translate(-50%, -50%) translate3d(
+    calc(var(--hero-mx) * 32px),
+    calc(var(--hero-my) * 20px - var(--hero-scroll) * 0.12px),
+    0
+  );
+  background: radial-gradient(
+    ellipse at center,
+    rgba(34, 197, 94, 0.2) 0%,
+    rgba(59, 130, 246, 0.08) 42%,
+    transparent 72%
+  );
+  filter: blur(56px);
+  opacity: 0.85;
+}
+
+.hero__particle--blue {
+  background: rgba(59, 130, 246, 0.85);
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.35);
+}
+
+.hero__particle--green {
+  background: var(--energy);
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.35);
+}
+
+/* Scène device */
+.hero__device-wrap {
+  transform-style: preserve-3d;
+  transition: none;
+  will-change: transform;
+}
+
+.hero__phone-stage {
+  position: relative;
+  z-index: 2;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.hero__device-glow {
+  transition: opacity 0.4s ease, transform 0.1s linear;
+  transform: translate(-50%, -50%)
+    translate3d(var(--hero-glow-shift-x), var(--hero-glow-shift-y), 0)
+    scale(var(--hero-glow-scale));
+}
+
+/* Cartes flottantes — wrapper 3D */
+.hero__parallax-item {
+  position: absolute;
+  z-index: 3;
+  transform-style: preserve-3d;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.hero__parallax-item .float-card,
+.hero__parallax-item .hero__live-card {
+  position: relative;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  pointer-events: auto;
+}
+
+.hero__parallax-item--1 { top: 5%; left: -8%; }
+.hero__parallax-item--2 { top: 15%; right: -12%; left: auto; }
+.hero__parallax-item--3 { bottom: 25%; left: -15%; }
+.hero__parallax-item--4 { bottom: 8%; right: -10%; left: auto; }
+.hero__parallax-item--live {
+  top: -4%;
+  right: -18%;
+  left: auto;
+}
+
+.hero__parallax-item .float-card,
+.hero__parallax-item .hero__live-card {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Téléphone 3D premium */
+.phone-mockup--hero {
+  filter: drop-shadow(0 28px 48px rgba(0, 0, 0, 0.55));
+}
+
+.phone-mockup--hero .phone-mockup__frame {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.09),
+    0 36px 72px rgba(0, 0, 0, 0.62),
+    0 0 56px rgba(34, 197, 94, 0.28),
+    0 0 100px rgba(34, 197, 94, 0.12);
+}
+
+#hero.hero--parallax-active .phone-mockup--hero .phone-mockup__frame {
+  transition: box-shadow 0.45s var(--ease);
+}
+
+#hero.hero--parallax-active .hero__device-wrap.is-hovered .phone-mockup--hero .phone-mockup__frame {
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.12),
+    0 48px 96px rgba(0, 0, 0, 0.68),
+    0 0 72px rgba(34, 197, 94, 0.42),
+    0 0 120px rgba(34, 197, 94, 0.22);
+}
+
+/* Mobile : parallax léger, pas de 3D agressif */
+@media (max-width: 1023px) {
+  #hero {
+    perspective: none;
+  }
+
+  .hero__depth {
+    transform: translate3d(0, calc(var(--hero-scroll) * 0.05px), 0);
+  }
+
+  .hero__depth-mesh,
+  .hero__depth-glow {
+    transform: none;
+  }
+
+  .hero__parallax-item,
+  .hero__phone-stage {
+    will-change: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero__depth-glow {
+    opacity: 0.5;
+    width: 100%;
+    left: 50%;
+  }
+
+  .hero__particle {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #hero {
+    perspective: none;
+  }
+
+  .hero__depth,
+  .hero__depth-mesh,
+  .hero__depth-glow,
+  [data-hero-parallax="content"],
+  .hero__parallax-item,
+  .hero__phone-stage,
+  .hero__device-glow {
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .hero__device-wrap {
+    transform: none !important;
+  }
+
+  .phone-mockup--hero,
+  .phone-mockup--hero .phone-mockup__frame {
+    transform: none !important;
+  }
+}

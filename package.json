@@ -1,0 +1,10 @@
+{
+  "name": "pulsefit",
+  "private": true,
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "ai-proxy": "node scripts/ai-proxy.mjs",
+    "setup:sql": "node scripts/build-full-sql.mjs",
+    "setup": "node scripts/setup.mjs"
+  }
+}

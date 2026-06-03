@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulseFit — Mot de passe oublié</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../app/auth.css">
+</head>
+<body class="auth-page" data-theme="dark">
+  <div class="noise" aria-hidden="true"></div>
+  <a href="../login/" class="auth-back">← Connexion</a>
+  <main class="auth-card">
+    <div class="auth-brand">
+      <h1>Mot de passe oublié</h1>
+      <p class="auth-tag">Lien de réinitialisation par email (Supabase)</p>
+    </div>
+    <form class="auth-form" id="forgotForm">
+      <label>Email<input type="email" name="email" required></label>
+      <p class="auth-error" id="forgotError" hidden></p>
+      <p class="auth-success" id="forgotSuccess" hidden style="color:var(--energy);font-size:0.9rem"></p>
+      <button type="submit" class="btn btn--primary btn--block">Envoyer le lien</button>
+    </form>
+    <p class="auth-footer"><a href="../login/">Retour à la connexion</a></p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../pulsefit-auth.js"></script>
+  <script>
+    document.getElementById('forgotForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = new FormData(e.target).get('email');
+      const res = await PulseFitAuth.forgotPassword(email);
+      document.getElementById('forgotError').hidden = res.ok;
+      document.getElementById('forgotSuccess').hidden = !res.ok;
+      if (!res.ok) document.getElementById('forgotError').textContent = res.error;
+      else document.getElementById('forgotSuccess').textContent = res.message;
+    });
+  </script>
+</body>
+</html>

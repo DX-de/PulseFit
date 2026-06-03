@@ -1,0 +1,26 @@
+{
+  "name": "PulseFit — Coach fitness IA",
+  "short_name": "PulseFit",
+  "description": "Coach personnel IA : programmes, nutrition, gamification et suivi de progression.",
+  "start_url": "/dashboard/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#050505",
+  "theme_color": "#22C55E",
+  "lang": "fr",
+  "categories": ["health", "fitness", "lifestyle"],
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Dashboard", "url": "/dashboard/", "description": "Tableau de bord" },
+    { "name": "Coach IA", "url": "/ai-coach/", "description": "Parler au coach" },
+    { "name": "Séance", "url": "/program/?tab=workout", "description": "Entraînement du jour" }
+  ]
+}

@@ -1,0 +1,272 @@
+/* PulseFit — Nutrition Premium */
+
+.nutri-topbar { margin-bottom: 8px; }
+
+.nutri-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.nutri-tabs__btn {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--gray-light);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.nutri-tabs__btn.active,
+.nutri-tabs__btn:hover {
+  color: #fff;
+  border-color: rgba(34, 197, 94, 0.45);
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.nutri-glass {
+  background: rgba(12, 12, 12, 0.75) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nutri-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.nutri-card {
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nutri-card--glow {
+  border-color: rgba(34, 197, 94, 0.35);
+  box-shadow: 0 0 40px rgba(34, 197, 94, 0.08);
+}
+
+.nutri-card span { font-size: 0.8rem; color: var(--gray-light); }
+.nutri-card strong { font-size: 1.5rem; font-family: var(--font-display); }
+.nutri-card small { font-size: 0.75rem; color: var(--gray-light); }
+
+.nutri-ring {
+  position: relative;
+  width: 100%;
+  max-width: 140px;
+  margin: 0 auto;
+}
+
+.nutri-ring svg { width: 100%; height: auto; display: block; }
+
+.nutri-ring__text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.nutri-ring__text strong { font-size: 1.4rem; color: var(--energy); }
+.nutri-ring__text span { font-size: 0.75rem; color: var(--gray-light); }
+.nutri-ring__text small { font-size: 0.65rem; color: var(--gray-light); }
+
+.nutri-macro { margin-bottom: 14px; }
+
+.nutri-macro__head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+
+.nutri-macro__track {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.nutri-macro__fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nutri-stats-dl {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 0;
+}
+
+.nutri-stats-dl div {
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.nutri-stats-dl dt { font-size: 0.75rem; color: var(--gray-light); margin: 0; }
+.nutri-stats-dl dd { margin: 4px 0 0; font-weight: 600; }
+
+.saas-form--grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.nutri-food-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.nutri-food-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nutri-food-list li div { display: grid; gap: 2px; }
+
+.nutri-ai-meal {
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 10px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.nutri-shop-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: grid;
+  gap: 8px;
+}
+
+.nutri-shop-list li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.9rem;
+}
+
+.nutri-chart {
+  height: 160px;
+  margin-top: 12px;
+}
+
+.nutri-chart svg { width: 100%; height: 100%; }
+
+.nutri-delta {
+  font-size: 1.1rem;
+  color: var(--electric);
+  margin: 8px 0;
+}
+
+.nutri-delta.is-loss { color: var(--energy); }
+
+.nutri-range-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0;
+}
+
+.nutri-photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.nutri-photo-phase h3 {
+  font-size: 0.9rem;
+  margin: 0 0 10px;
+  color: var(--gray-light);
+}
+
+.nutri-photo-slot {
+  display: block;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+.nutri-photo-slot img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  display: block;
+  opacity: 0.85;
+}
+
+.nutri-photo-slot span {
+  display: block;
+  text-align: center;
+  font-size: 0.75rem;
+  padding: 4px;
+  color: var(--gray-light);
+}
+
+.nutri-water-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nutri-search-list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.nutri-search-item {
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  cursor: pointer;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.nutri-search-item:hover {
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.nutri-search-item strong { display: block; }
+.nutri-search-item span { font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); }
+
+@media (max-width: 768px) {
+  .nutri-cards { grid-template-columns: repeat(2, 1fr); }
+  .nutri-stats-dl { grid-template-columns: 1fr; }
+}

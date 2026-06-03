@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PulseFit — Coach fitness IA. Programmes personnalisés, nutrition et suivi. Résultats mesurables en 8 semaines.">
+  <meta property="og:title" content="PulseFit — Coach fitness IA premium">
+  <meta property="og:description" content="Créez votre programme IA en 30 secondes. Entraînement, nutrition et progression dans une seule app.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="og-cover.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#22C55E">
+  <title>PulseFit — Coach IA Fitness</title>
+  <link rel="icon" href="assets/logo-nav.png" type="image/png">
+  <link rel="preload" href="assets/logo-nav.png" as="image" type="image/png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/hero-parallax.css">
+  <link rel="stylesheet" href="css/landing-screens.css">
+  <link rel="stylesheet" href="css/landing-polish.css">
+  <script>
+    (function () {
+      var authed = sessionStorage.getItem('pulsefit-authed') === '1';
+      if (authed && sessionStorage.getItem('pulsefit-user')) {
+        document.documentElement.classList.add('nav-is-authed');
+      }
+    })();
+  </script>
+</head>
+<body data-theme="dark">
+  <div class="noise" aria-hidden="true"></div>
+  <div class="glow-orb glow-orb--green" aria-hidden="true"></div>
+  <div class="glow-orb glow-orb--blue" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav" aria-label="Navigation principale">
+    <div class="nav__inner">
+      <a href="#hero" class="nav__logo" aria-label="PulseFit — Accueil">
+        <img src="assets/logo-nav.png" srcset="assets/logo-nav.png 1x, assets/logo-128.png 2x" class="pf-brand-logo" width="32" height="32" alt="" decoding="async" fetchpriority="high">
+        <span class="nav__logo-wordmark">PulseFit</span>
+      </a>
+
+      <div class="nav__center">
+        <div class="nav__pill" role="navigation" aria-label="Sections">
+          <a href="#hero" class="nav__link" data-nav="home" data-i18n="nav_home">Accueil</a>
+          <a href="#screens" class="nav__link" data-nav="app" data-i18n="nav_app">App</a>
+          <a href="#program-cta" class="nav__link" data-nav="program" data-i18n="nav_program">Programme</a>
+          <a href="#daily-loop" class="nav__link" data-nav="nutrition" data-i18n="nav_nutrition">Nutrition</a>
+          <a href="#ai" class="nav__link" data-nav="coach" data-i18n="nav_coach">Coach IA</a>
+          <a href="#pricing" class="nav__link" data-nav="pricing" data-i18n="nav_pricing">Tarifs</a>
+        </div>
+      </div>
+
+      <div class="nav__actions">
+        <div class="nav__controls" aria-label="Préférences">
+          <button class="nav__ctrl lang-toggle" id="langToggle" type="button" aria-label="Language">EN</button>
+          <button class="nav__ctrl theme-toggle" id="themeToggle" type="button" aria-label="Changer de thème">
+            <span class="nav__ctrl-icon" aria-hidden="true">◐</span>
+          </button>
+        </div>
+
+        <div class="nav__auth nav__auth--desktop" data-nav-auth-root>
+          <div class="nav__auth-guest" data-nav-auth-guest>
+            <a href="login/" class="btn btn--ghost btn--sm nav__login" data-i18n="nav_login">Connexion</a>
+            <button type="button" class="nav__cta btn btn--primary btn--sm" data-action="config" data-i18n="nav_cta">Créer mon programme IA</button>
+          </div>
+          <div class="nav__auth-authed" data-nav-auth-user hidden>
+            <div class="nav__user-wrap">
+              <button type="button" class="nav__user" aria-expanded="false" aria-haspopup="menu">
+                <span class="nav__user-avatar-wrap">
+                  <img class="nav__user-avatar" data-nav-user-avatar src="" alt="" width="36" height="36">
+                  <span class="nav__user-status" title="Connecté" aria-hidden="true"></span>
+                </span>
+                <span class="nav__user-meta">
+                  <span class="nav__user-name" data-nav-user-name>Mon compte</span>
+                  <span class="nav__user-plan-line" data-nav-user-plan-line>Elite Member</span>
+                  <span class="nav__user-stats">
+                    <span class="nav__user-xp" data-nav-user-xp>134 XP</span>
+                    <span class="nav__user-streak" data-nav-user-streak>🔥 7 jours</span>
+                  </span>
+                </span>
+                <span class="nav__user-chevron" aria-hidden="true">▾</span>
+              </button>
+              <div class="nav__dropdown" role="menu" hidden>
+                <a href="dashboard/" role="menuitem" data-i18n="nav_dd_dashboard">Dashboard</a>
+                <a href="profile/" role="menuitem" data-i18n="nav_dd_profile">Profil</a>
+                <a href="program/" role="menuitem" data-i18n="nav_dd_program">Mon programme</a>
+                <a href="pricing/" role="menuitem" data-i18n="nav_dd_subscription">Abonnement</a>
+                <hr class="nav__dropdown-divider">
+                <button type="button" class="nav__dropdown-logout" data-nav-logout role="menuitem" data-i18n="nav_dd_logout">Déconnexion</button>
+              </div>
+            </div>
+            <a href="program/" class="btn btn--primary btn--sm nav__cta nav__cta--authed" data-nav-authed-cta data-i18n="nav_continue_program">Continuer mon programme</a>
+          </div>
+        </div>
+
+        <button class="nav__burger" id="navBurger" type="button" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu__backdrop" data-close-menu></div>
+    <div class="mobile-menu__panel">
+      <div class="mobile-menu__auth nav__auth nav__auth--mobile" data-nav-auth-root>
+        <div class="nav__auth-guest mobile-menu__auth-guest" data-nav-auth-guest>
+          <p class="mobile-menu__auth-label" data-i18n="nav_guest_label">Découvrez PulseFit</p>
+          <a href="login/" class="btn btn--ghost btn--block nav__login" data-i18n="nav_login">Connexion</a>
+          <button type="button" class="btn btn--primary btn--glow btn--block" data-action="config" data-i18n="nav_cta">Créer mon programme IA</button>
+        </div>
+        <div class="nav__auth-authed nav__auth-authed--mobile" data-nav-auth-user hidden>
+        <div class="nav__user-card">
+          <div class="nav__user-card-head">
+            <span class="nav__user-avatar-wrap">
+              <img class="nav__user-avatar" data-nav-user-avatar src="" alt="" width="48" height="48">
+              <span class="nav__user-status" aria-hidden="true"></span>
+            </span>
+            <div class="nav__user-card-meta">
+              <span class="nav__user-name" data-nav-user-name>Mon compte</span>
+              <span class="nav__user-plan-line" data-nav-user-plan-line>Elite Member</span>
+              <span class="nav__user-stats">
+                <span data-nav-user-xp>134 XP</span>
+                <span data-nav-user-streak>🔥 7 jours</span>
+              </span>
+            </div>
+          </div>
+          <nav class="nav__user-menu" aria-label="Compte">
+            <a href="dashboard/" data-i18n="nav_dd_dashboard">Dashboard</a>
+            <a href="profile/" data-i18n="nav_dd_profile">Profil</a>
+            <a href="program/" data-i18n="nav_dd_program">Mon programme</a>
+            <a href="pricing/" data-i18n="nav_dd_subscription">Abonnement</a>
+            <button type="button" data-nav-logout data-i18n="nav_dd_logout">Déconnexion</button>
+          </nav>
+          <a href="program/" class="btn btn--primary btn--glow btn--block nav__cta--authed" data-nav-authed-cta data-i18n="nav_continue_program">Continuer mon programme</a>
+        </div>
+        </div>
+      </div>
+      <nav class="mobile-menu__links" aria-label="Menu mobile">
+        <a href="#hero" class="nav__link" data-nav="home" data-i18n="nav_home">Accueil</a>
+        <a href="#screens" class="nav__link" data-nav="app" data-i18n="nav_app">App</a>
+        <a href="#program-cta" class="nav__link" data-nav="program" data-i18n="nav_program">Programme</a>
+        <a href="#daily-loop" class="nav__link" data-nav="nutrition" data-i18n="nav_nutrition">Nutrition</a>
+        <a href="#ai" class="nav__link" data-nav="coach" data-i18n="nav_coach">Coach IA</a>
+        <a href="#pricing" class="nav__link" data-nav="pricing" data-i18n="nav_pricing">Tarifs</a>
+      </nav>
+      <div class="mobile-menu__tools">
+        <button class="nav__ctrl lang-toggle" type="button" data-i18n-aria="lang_label">EN</button>
+        <button class="nav__ctrl theme-toggle" type="button" aria-label="Thème">
+          <span class="nav__ctrl-icon" aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 1: Hero avec mockup -->
+  <section class="hero" id="hero">
+    <div class="hero__depth" id="heroDepth" aria-hidden="true">
+      <div class="hero__depth-mesh"></div>
+      <div class="hero__depth-glow"></div>
+      <div class="hero__particles" id="heroParticles"></div>
+    </div>
+
+    <div class="hero__content hero__content--reveal" data-hero-parallax="content">
+      <p class="hero__badge hero__reveal" style="--hero-delay: 0.05s">
+        <span class="pulse-dot"></span>
+        <span data-i18n="hero_badge">Nouveau · Coach IA v2.4</span>
+      </p>
+      <h1 class="hero__title hero__reveal" style="--hero-delay: 0.12s">
+        <span data-i18n="hero_title">Votre coach personnel,</span><br>
+        <span class="gradient-text" data-i18n="hero_title_accent">alimenté par l'IA.</span>
+      </h1>
+
+      <ul class="hero__proof hero__reveal" style="--hero-delay: 0.2s" aria-label="Preuve sociale">
+        <li class="hero__proof-pill"><span aria-hidden="true">✦</span> <span data-i18n="hero_proof_coach">Coach IA personnalisé</span></li>
+        <li class="hero__proof-pill"><span aria-hidden="true">📊</span> <span data-i18n="hero_proof_stats">Stats issues de vos séances</span></li>
+        <li class="hero__proof-pill"><span aria-hidden="true">☁️</span> <span data-i18n="hero_proof_sync">Compte synchronisé Supabase</span></li>
+      </ul>
+
+      <p class="hero__honesty hero__reveal" style="--hero-delay: 0.26s" data-i18n="hero_honesty">Vos données sont liées à votre compte — programme, nutrition et progression en temps réel.</p>
+      <p class="hero__subtitle hero__reveal" style="--hero-delay: 0.32s" data-i18n="hero_subtitle">
+        L'IA ajuste vos séances, repas et objectifs selon votre profil et votre activité réelle.
+      </p>
+
+      <div class="hero__actions hero__reveal" style="--hero-delay: 0.38s">
+        <button class="btn btn--primary btn--glow btn--lg hero__cta-main" data-landing-cta-main data-action="config" type="button">
+          <span class="hero__cta-emoji" aria-hidden="true">🚀</span>
+          <span data-i18n="hero_cta" data-landing-cta-label>Commencer gratuitement</span>
+        </button>
+        <button class="btn btn--ghost" type="button" data-scroll="#video-demo">
+          <span data-i18n="hero_demo">Voir la démo</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      <p class="hero__cta-note hero__reveal" style="--hero-delay: 0.44s" data-landing-cta-note data-i18n="hero_cta_note">Aucune carte bancaire requise.</p>
+
+      <div class="hero__quotes hero__reveal" style="--hero-delay: 0.5s" id="heroQuotes">
+        <div class="hero__quotes-track" id="heroQuotesTrack">
+          <blockquote class="hero__quote is-active">
+            <div class="hero__quote-stars" aria-hidden="true">★★★★★</div>
+            <p data-i18n="hero_quote_1">« J'ai perdu 12 kg en 3 mois grâce à PulseFit. »</p>
+            <footer data-i18n="hero_quote_1_author">— Thomas</footer>
+          </blockquote>
+          <blockquote class="hero__quote">
+            <div class="hero__quote-stars" aria-hidden="true">★★★★★</div>
+            <p data-i18n="hero_quote_2">« Le coach IA m'a aidée à rester motivée. »</p>
+            <footer data-i18n="hero_quote_2_author">— Sarah</footer>
+          </blockquote>
+        </div>
+        <div class="hero__quotes-dots" id="heroQuotesDots" aria-hidden="true">
+          <button type="button" class="is-active" data-quote="0" aria-label="Témoignage 1"></button>
+          <button type="button" data-quote="1" aria-label="Témoignage 2"></button>
+        </div>
+      </div>
+
+      <ul class="hero__trust hero__reveal" style="--hero-delay: 0.56s">
+        <li data-i18n="hero_trust_1">✓ Plans personnalisés</li>
+        <li data-i18n="hero_trust_2">✓ Nutrition intelligente</li>
+        <li data-i18n="hero_trust_3">✓ Adaptation automatique</li>
+        <li data-i18n="hero_trust_4">✓ Disponible iOS &amp; Android</li>
+      </ul>
+    </div>
+
+    <div class="hero__floats-mobile" id="heroFloatsMobile" aria-hidden="true"></div>
+
+    <div class="hero__device-wrap" id="heroDevice" data-hero-device>
+      <div class="hero__device-glow" id="heroDeviceGlow" data-hero-parallax="glow" aria-hidden="true"></div>
+
+      <div class="hero__parallax-item hero__parallax-item--live" data-hero-parallax="card-live" hidden>
+      <aside class="hero__live-card float-card hero__reveal" style="--hero-delay: 0.65s" aria-label="Vos stats cette semaine">
+        <div class="hero__live-title"><span aria-hidden="true">🔥</span> <span data-i18n="hero_live_title">Cette semaine</span></div>
+        <ul class="hero__live-stats">
+          <li>
+            <strong class="hero__count">—</strong>
+            <span data-i18n="hero_live_1">kg perdus (vous)</span>
+          </li>
+          <li>
+            <strong class="hero__count">0</strong>
+            <span data-i18n="hero_live_2">séances cette semaine</span>
+          </li>
+          <li>
+            <strong class="hero__count">0</strong>
+            <span data-i18n="hero_live_3">jours de streak</span>
+          </li>
+        </ul>
+      </aside>
+      </div>
+
+      <div class="hero__interactive-cards" id="heroInteractiveCards" aria-hidden="true">
+        <article class="hero-hover-card is-active" data-hero-card="0">
+          <span class="hero-hover-card__icon">🎯</span>
+          <span class="hero-hover-card__label" data-i18n="hero_hover_goal">Objectif atteint</span>
+          <strong class="hero-hover-card__value" data-landing-hover-goal>—</strong>
+        </article>
+        <article class="hero-hover-card" data-hero-card="1">
+          <span class="hero-hover-card__icon">🔥</span>
+          <span class="hero-hover-card__label" data-i18n="hero_hover_cal">Calories brûlées</span>
+          <strong class="hero-hover-card__value" data-landing-hover-cal>— <small>kcal</small></strong>
+        </article>
+        <article class="hero-hover-card" data-hero-card="2">
+          <span class="hero-hover-card__icon">⚖️</span>
+          <span class="hero-hover-card__label" data-i18n="hero_hover_weight">Poids perdu</span>
+          <strong class="hero-hover-card__value" data-landing-hover-weight>— <small>kg</small></strong>
+        </article>
+        <article class="hero-hover-card" data-hero-card="3">
+          <span class="hero-hover-card__icon">✨</span>
+          <span class="hero-hover-card__label" data-i18n="hero_hover_xp">XP gagné</span>
+          <strong class="hero-hover-card__value" data-landing-hover-xp>—</strong>
+        </article>
+        <article class="hero-hover-card" data-hero-card="4">
+          <span class="hero-hover-card__icon">🔥</span>
+          <span class="hero-hover-card__label" data-i18n="hero_hover_streak">Série actuelle</span>
+          <strong class="hero-hover-card__value" data-landing-hover-streak>— <small>jours</small></strong>
+        </article>
+      </div>
+
+      <div class="hero__parallax-item hero__parallax-item--1" data-hero-parallax="card-1">
+        <div class="float-card float-card--1 float-card--desktop hero__float-static" data-float="1">
+          <div class="float-card__icon">🔥</div>
+          <div class="float-card__label">Calories brûlées</div>
+          <div class="float-card__value">— <span>kcal</span></div>
+          <div class="float-card__bar"><div class="float-card__fill" style="width: 0%"></div></div>
+        </div>
+      </div>
+      <div class="hero__parallax-item hero__parallax-item--2" data-hero-parallax="card-2">
+        <div class="float-card float-card--2 float-card--desktop hero__float-static" data-float="2">
+          <div class="float-card__icon">🎯</div>
+          <div class="float-card__label">Objectif du jour</div>
+          <div class="float-card__value">Vos séances</div>
+          <div class="float-card__meta">Après connexion</div>
+        </div>
+      </div>
+      <div class="hero__parallax-item hero__parallax-item--3" data-hero-parallax="card-3">
+        <div class="float-card float-card--3 float-card--desktop hero__float-static" data-float="3">
+          <div class="float-card__icon">🤖</div>
+          <div class="float-card__label">Programme IA</div>
+          <div class="float-card__value">Force + Cardio</div>
+          <div class="float-card__meta">Adapté à votre profil</div>
+        </div>
+      </div>
+      <div class="hero__parallax-item hero__parallax-item--4" data-hero-parallax="card-4">
+        <div class="float-card float-card--4 float-card--desktop hero__float-static" data-float="4">
+          <div class="float-card__icon">📈</div>
+          <div class="float-card__label">Progression hebdo</div>
+          <div class="float-card__value">—</div>
+          <div class="float-card__sparkline">
+            <svg viewBox="0 0 80 24"><polyline points="0,20 12,16 24,18 36,10 48,12 60,6 72,8 80,2" fill="none" stroke="#22C55E" stroke-width="2"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__phone-stage" data-hero-parallax="phone">
+      <div class="phone-mockup phone-mockup--hero" id="heroPhone">
+        <div class="phone-mockup__frame">
+          <div class="phone-mockup__notch"></div>
+          <div class="phone-mockup__screen">
+            <div class="app-ui" id="landingPhoneUi">
+              <div class="app-ui__header">
+                <span data-landing-phone-greet>Votre tableau de bord</span>
+                <div class="app-ui__avatar" data-landing-phone-avatar>·</div>
+              </div>
+              <div class="app-ui__ring">
+                <svg viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="52" fill="none" stroke="#171717" stroke-width="8"/>
+                  <circle cx="60" cy="60" r="52" fill="none" stroke="#22C55E" stroke-width="8" stroke-dasharray="327" data-landing-phone-ring stroke-dashoffset="82" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+                </svg>
+                <div class="app-ui__ring-center">
+                  <strong data-landing-phone-progress>—</strong>
+                  <span>Objectif jour</span>
+                </div>
+              </div>
+              <div class="app-ui__stats">
+                <div><strong data-landing-phone-steps>—</strong><span>pas</span></div>
+                <div><strong data-landing-phone-kcal>0</strong><span>kcal</span></div>
+                <div><strong data-landing-phone-min>0</strong><span>min</span></div>
+              </div>
+              <div class="app-ui__card">
+                <div class="app-ui__card-title">Séance recommandée</div>
+                <div class="app-ui__card-body" data-landing-phone-session>Connectez-vous pour voir votre séance</div>
+                <button class="app-ui__btn" type="button">Démarrer</button>
+              </div>
+              <div class="app-ui__nav">
+                <span class="active">●</span><span>○</span><span>○</span><span>○</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Parcours premium (suite directe du Hero) -->
+  <section class="landing-features reveal" id="features">
+    <div class="section-header section-header--center">
+      <span class="section-tag">Fonctionnalités</span>
+      <h2>Tout ce qu'il faut pour transformer votre corps.</h2>
+      <p class="section-intro">Programme IA, nutrition, coach et suivi — dans une seule expérience premium.</p>
+    </div>
+    <div class="landing-features__grid">
+      <article class="landing-feature-card depth-hover glow-card">
+        <span class="landing-feature-card__icon">📋</span>
+        <h3>Programme personnalisé</h3>
+        <p>Adapté à votre morphologie, niveau et historique réel.</p>
+      </article>
+      <article class="landing-feature-card depth-hover glow-card">
+        <span class="landing-feature-card__icon">🥗</span>
+        <h3>Nutrition intelligente</h3>
+        <p>Macros, repas et liste de courses générés par l'IA.</p>
+      </article>
+      <article class="landing-feature-card depth-hover glow-card">
+        <span class="landing-feature-card__icon">💬</span>
+        <h3>Coach IA personnel</h3>
+        <p>Conseils basés sur vos séances, poids et objectifs.</p>
+      </article>
+      <article class="landing-feature-card depth-hover glow-card">
+        <span class="landing-feature-card__icon">📊</span>
+        <h3>Suivi de progression</h3>
+        <p>XP, streak, graphiques et alertes intelligentes.</p>
+      </article>
+      <article class="landing-feature-card depth-hover glow-card">
+        <span class="landing-feature-card__icon">⚙️</span>
+        <h3>Ajustement automatique</h3>
+        <p>Charge et volume recalibrés chaque semaine.</p>
+      </article>
+      <article class="landing-feature-card depth-hover glow-card">
+        <span class="landing-feature-card__icon">📱</span>
+        <h3>iOS &amp; Android</h3>
+        <p>Parcours complet dans le navigateur, prêt pour mobile.</p>
+      </article>
+    </div>
+  </section>
+
+<section class="transform" id="transform">
+    <div class="section-header section-header--center">
+      <span class="section-tag">Transformations</span>
+      <h2>Des résultats mesurables,<br>visibles et durables.</h2>
+    </div>
+    <div class="transform-profiles" id="transformProfiles">
+      <button class="transform-tab active" data-profile="0">Thomas</button>
+      <button class="transform-tab" data-profile="1">Sarah</button>
+      <button class="transform-tab" data-profile="2">Julien</button>
+    </div>
+    <div class="ba-compare" id="baCompare">
+      <div class="ba-compare__layer ba-compare__before">
+        <img id="baBeforeImg" src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=900&q=80" alt="Avant transformation" loading="lazy" decoding="async">
+        <div class="ba-compare__badge ba-compare__badge--before">Avant</div>
+      </div>
+      <div class="ba-compare__layer ba-compare__after" id="baAfterLayer">
+        <img id="baAfterImg" src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=900&q=80" alt="Après transformation" loading="lazy" decoding="async">
+        <div class="ba-compare__badge ba-compare__badge--after">Après</div>
+      </div>
+      <div class="ba-compare__handle" id="baHandle">
+        <div class="ba-compare__line"></div>
+        <div class="ba-compare__knob">↔</div>
+      </div>
+      <input type="range" min="0" max="100" value="52" class="ba-compare__input" id="baInput" aria-label="Comparer avant et après">
+    </div>
+    <div class="ba-stats" id="baStats">
+      <div><span>Avant</span><strong id="baBeforeWeight">82 kg</strong></div>
+      <div><span>Après</span><strong id="baAfterWeight">74 kg</strong></div>
+      <div><span>Perte</span><strong id="baLoss" class="accent">-8 kg</strong></div>
+      <div><span>Durée</span><strong id="baDuration">8 semaines</strong></div>
+    </div>
+    <div class="ba-timeline" id="baTimeline">
+      <span class="active">Semaine 0</span>
+      <span>Semaine 4</span>
+      <span>Semaine 8</span>
+    </div>
+    <p class="transform__hint">Glissez le curseur pour comparer les profils</p>
+    <p class="transform__disclaimer">Résultats individuels · Photos et témoignages illustratifs · Votre progression est calculée à partir de vos données.</p>
+  </section>
+
+<section class="social-proof" id="social-proof">
+    <div class="section-header section-header--center">
+      <span class="section-tag">Communauté PulseFit</span>
+      <h2>Ils ont déjà transformé<br>leur quotidien.</h2>
+      <p class="social-proof__rating" data-i18n="social_rating">Avis de membres PulseFit — résultats selon engagement et régularité.</p>
+    </div>
+    <blockquote class="testimonial-featured reveal">
+      <p>« PulseFit a remplacé mon coach perso : séances, repas et motivation au même endroit. En 10 semaines, j'ai retrouvé une régularité que je n'avais jamais tenue. »</p>
+      <footer>
+        <img src="https://ui-avatars.com/api/?name=PulseFit&background=22C55E&color=050505&size=80" alt="" width="40" height="40" loading="lazy" decoding="async">
+        <div><strong>Thomas R.</strong><span>Perte de 8 kg · Plan Pro</span></div>
+      </footer>
+    </blockquote>
+    <div class="press-logos">
+      <span>TechFit</span><span>Wellness Mag</span><span>SportIA</span><span>HealthReview</span>
+    </div>
+    <div class="testimonials-slider">
+      <div class="testimonials-track" id="testimonialsTrack">
+        <article class="testimonial-card">
+          <img class="testimonial-card__avatar" loading="lazy" decoding="async" src="https://ui-avatars.com/api/?name=Thomas&background=171717&color=22C55E&size=120" alt="Thomas" width="56" height="56">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p>"J'ai perdu 8kg en seulement 2 mois."</p>
+          <footer>Thomas · 29 ans</footer>
+        </article>
+        <article class="testimonial-card">
+          <img class="testimonial-card__avatar" loading="lazy" decoding="async" src="https://ui-avatars.com/api/?name=Sarah&background=171717&color=22C55E&size=120" alt="Sarah" width="56" height="56">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p>"Le coach IA me motive tous les jours."</p>
+          <footer>Sarah · 34 ans</footer>
+        </article>
+        <article class="testimonial-card">
+          <img class="testimonial-card__avatar" loading="lazy" decoding="async" src="https://ui-avatars.com/api/?name=Julien&background=171717&color=22C55E&size=120" alt="Julien" width="56" height="56">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p>"Enfin une application adaptée à mon rythme."</p>
+          <footer>Julien · 26 ans</footer>
+        </article>
+        <article class="testimonial-card">
+          <img class="testimonial-card__avatar" loading="lazy" decoding="async" src="https://ui-avatars.com/api/?name=Emma&background=171717&color=22C55E&size=120" alt="Emma" width="56" height="56">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p>"Mes séances sont parfaitement calibrées."</p>
+          <footer>Emma · 31 ans</footer>
+        </article>
+        <article class="testimonial-card">
+          <img class="testimonial-card__avatar" loading="lazy" decoding="async" src="https://ui-avatars.com/api/?name=Karim&background=171717&color=22C55E&size=120" alt="Karim" width="56" height="56">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p>"La nutrition IA m'a fait gagner un temps fou."</p>
+          <footer>Karim · 38 ans</footer>
+        </article>
+        <article class="testimonial-card">
+          <img class="testimonial-card__avatar" loading="lazy" decoding="async" src="https://ui-avatars.com/api/?name=L%C3%A9a&background=171717&color=22C55E&size=120" alt="Léa" width="56" height="56">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p>"Je me sens plus forte et plus régulière."</p>
+          <footer>Léa · 27 ans</footer>
+        </article>
+      </div>
+    </div>
+  </section>
+
+<section class="pricing" id="pricing">
+    <div class="section-header section-header--center">
+      <span class="section-tag">Abonnements</span>
+      <h2>Choisissez votre formule.</h2>
+    </div>
+    <div class="pricing__cards">
+      <article class="price-card">
+        <div class="price-card__badge">Free</div>
+        <div class="price-card__price"><span>0</span>€<small>/mois</small></div>
+        <ul class="price-card__features">
+          <li>3 séances / semaine</li>
+          <li>Suivi basique</li>
+          <li>1 programme IA</li>
+        </ul>
+        <button class="btn btn--ghost btn--block" data-action="config">Essayer gratuitement</button>
+      </article>
+      <article class="price-card price-card--featured">
+        <div class="price-card__popular">Populaire</div>
+        <div class="price-card__badge">Pro</div>
+        <div class="price-card__price"><span>9</span>€<small>/mois</small></div>
+        <ul class="price-card__features">
+          <li>Séances illimitées</li>
+          <li>Coach IA complet</li>
+          <li>Nutrition avancée</li>
+          <li>Analyse progrès</li>
+        </ul>
+        <button class="btn btn--primary btn--block btn--glow" data-action="config">Créer mon programme IA</button>
+      </article>
+      <article class="price-card">
+        <div class="price-card__badge">Elite</div>
+        <div class="price-card__price"><span>19</span>€<small>/mois</small></div>
+        <ul class="price-card__features">
+          <li>Tout Pro inclus</li>
+          <li>Plans 1-to-1 IA</li>
+          <li>Export données</li>
+          <li>Support prioritaire</li>
+        </ul>
+        <button class="btn btn--ghost btn--block" data-action="config">Essayer gratuitement</button>
+      </article>
+    </div>
+  </section>
+
+<section class="faq" id="faq">
+    <div class="section-header section-header--center">
+      <span class="section-tag">Support</span>
+      <h2>Questions fréquentes</h2>
+    </div>
+    <div class="faq__list">
+      <details class="faq-item">
+        <summary>Est-ce disponible sur Android ?</summary>
+        <p>Oui, PulseFit sera disponible sur Android avec synchronisation complète des données d'activité.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Est-ce disponible sur iPhone ?</summary>
+        <p>Oui, l'application iOS est optimisée pour iPhone avec intégration Apple Health.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Puis-je annuler à tout moment ?</summary>
+        <p>Oui, vous pouvez annuler votre abonnement en un clic depuis les réglages de l'application.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Le coach IA est-il personnalisé ?</summary>
+        <p>Le coach IA adapte chaque séance, chaque repas et chaque objectif selon votre profil et vos progrès.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Les programmes sont-ils adaptés aux débutants ?</summary>
+        <p>Absolument. PulseFit ajuste automatiquement la difficulté pour les débutants comme pour les avancés.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Combien de temps dure une séance ?</summary>
+        <p>De 15 à 60 minutes selon votre disponibilité. Le configurateur IA propose la durée idéale.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Est-ce une vraie application installable ?</summary>
+        <p>PulseFit est une <strong>application web</strong> avec compte utilisateur : vos séances, journal, nutrition et coach sont enregistrés et synchronisés avec votre profil (Supabase).</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="metrics metrics--real" id="metrics" aria-label="Fonctionnalités">
+    <div class="metrics__grid">
+      <div class="metric-card">
+        <strong class="metric-card__value">✦</strong>
+        <span>Coach IA contextuel</span>
+      </div>
+      <div class="metric-card">
+        <strong class="metric-card__value">📋</strong>
+        <span>Programme sur mesure</span>
+      </div>
+      <div class="metric-card">
+        <strong class="metric-card__value">🥗</strong>
+        <span>Nutrition & macros</span>
+      </div>
+      <div class="metric-card">
+        <strong class="metric-card__value">📈</strong>
+        <span>Progression mesurée</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works" id="how-it-works">
+    <div class="section-header section-header--center">
+      <span class="section-tag">Comment ça marche</span>
+      <h2>3 étapes.<br>Un produit complet.</h2>
+    </div>
+    <div class="steps-grid">
+      <article class="step-card">
+        <span class="step-card__num">01</span>
+        <h3>Configurez votre profil IA</h3>
+        <p>Objectif, niveau, temps disponible : PulseFit génère votre programme en moins de 30 secondes.</p>
+        <button class="btn btn--ghost btn--sm" data-action="config">Configurer</button>
+      </article>
+      <article class="step-card">
+        <span class="step-card__num">02</span>
+        <h3>Suivez séances & nutrition</h3>
+        <p>Coach IA, macros, timers et historique : tout est centralisé dans votre dashboard.</p>
+        <a class="btn btn--ghost btn--sm" href="login/">Ouvrir l'application</a>
+      </article>
+      <article class="step-card">
+        <span class="step-card__num">03</span>
+        <h3>L'IA ajuste chaque semaine</h3>
+        <p>Chaque lundi, votre plan est recalibré selon vos performances et votre progression réelle.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="daily-loop" id="daily-loop">
+    <div class="section-header section-header--center">
+      <span class="section-tag" data-i18n="daily_tag">Boucle produit réelle</span>
+      <h2 data-i18n-html="daily_title_html">Chaque jour dans l'app,<br>pas seulement sur la landing.</h2>
+      <p class="daily-loop__intro" data-i18n="daily_intro">PulseFit n'est pas qu'une vitrine : le dashboard enregistre vos séances, votre calendrier et votre journal. Voici le parcours quotidien d'un utilisateur.</p>
+    </div>
+    <div class="daily-loop__grid">
+      <article class="daily-loop__card reveal">
+        <span class="daily-loop__time" data-i18n="daily_1_time">Matin</span>
+        <h3 data-i18n="daily_1_title">Calendrier & séance du jour</h3>
+        <p data-i18n="daily_1_text">Le programme IA remplit votre semaine. Vous voyez quoi faire aujourd'hui, sans réfléchir.</p>
+        <a href="login/?next=calendar%2F" class="btn btn--ghost btn--sm" data-i18n="daily_1_cta">Voir le calendrier →</a>
+      </article>
+      <article class="daily-loop__card reveal">
+        <span class="daily-loop__time" data-i18n="daily_2_time">Séance</span>
+        <h3 data-i18n="daily_2_title">Entraînement guidé + chrono</h3>
+        <p data-i18n="daily_2_text">Exercices, timer, validation. Chaque séance terminée alimente vos stats et l'historique.</p>
+        <a href="login/?next=dashboard%2F%3Ftab%3Dworkout" class="btn btn--ghost btn--sm" data-i18n="daily_2_cta">Lancer une séance →</a>
+      </article>
+      <article class="daily-loop__card reveal">
+        <span class="daily-loop__time" data-i18n="daily_3_time">Après</span>
+        <h3 data-i18n="daily_3_title">Journal de performance</h3>
+        <p data-i18n="daily_3_text">Poids, charges, ressenti : tout est noté pour suivre une vraie progression mesurable.</p>
+        <a href="login/?next=journal%2F" class="btn btn--ghost btn--sm" data-i18n="daily_3_cta">Ouvrir le journal →</a>
+      </article>
+      <article class="daily-loop__card reveal">
+        <span class="daily-loop__time" data-i18n="daily_4_time">Lundi</span>
+        <h3 data-i18n="daily_4_title">Coach IA recalibre</h3>
+        <p data-i18n="daily_4_text">Selon vos séances manquées ou validées, l'IA propose un ajustement d'intensité — appliqué en un clic.</p>
+        <a href="login/?next=ai-coach%2F" class="btn btn--ghost btn--sm" data-i18n="daily_4_cta">Parler au coach →</a>
+      </article>
+    </div>
+    <div class="daily-loop__cta reveal">
+      <button class="btn btn--primary btn--glow" data-action="config" data-i18n="daily_main_cta">Générer mon programme et commencer</button>
+      <a href="login/" class="program-cta__link" data-i18n="daily_dash_link">Accéder à l'application complète →</a>
+    </div>
+  </section>
+
+  <section class="use-cases" id="use-cases">
+    <div class="section-header section-header--center">
+      <span class="section-tag" data-i18n="usecases_tag">Cas d'usage</span>
+      <h2 data-i18n="usecases_title">Une app, trois profils.</h2>
+    </div>
+    <div class="use-cases__grid">
+      <article class="use-case-card">
+        <span class="use-case-card__icon">⚖️</span>
+        <h3>Perte de poids</h3>
+        <p>Programmes cardio + déficit calorique guidé par l'IA. Objectif : -0,5 à -1 kg / semaine.</p>
+        <button class="btn btn--ghost btn--sm" data-action="config">Configurer</button>
+      </article>
+      <article class="use-case-card">
+        <span class="use-case-card__icon">💪</span>
+        <h3>Prise de muscle</h3>
+        <p>Hypertrophie progressive, suivi des charges et apports protéiques optimisés.</p>
+        <button class="btn btn--ghost btn--sm" data-action="config">Configurer</button>
+      </article>
+      <article class="use-case-card">
+        <span class="use-case-card__icon">🏃</span>
+        <h3>Remise en forme</h3>
+        <p>Parcours accessible, motivation quotidienne et habitudes durables en 15–30 min/jour.</p>
+        <button class="btn btn--ghost btn--sm" data-action="config">Configurer</button>
+      </article>
+    </div>
+  </section>
+
+  <!-- Section 2: Aperçus réels PulseFit -->
+  <section class="screens" id="screens">
+    <div class="section-header">
+      <span class="section-tag">L'application</span>
+      <h2>5 outils. Une seule app.<br>Tout pour progresser.</h2>
+      <p class="screens__lead">Dashboard, séances guidées, nutrition, coach IA et suivi de progression — le même écran que dans PulseFit, pas une maquette.</p>
+    </div>
+    <div class="screens__value-strip" aria-label="Fonctionnalités clés">
+      <span>📊 Dashboard live</span>
+      <span>🏋️ Séances + timer</span>
+      <span>🥗 Macros & repas</span>
+      <span>🤖 Coach IA local</span>
+      <span>📈 Courbes & photos</span>
+    </div>
+    <div class="screens__track-wrap">
+      <div class="screens__track" id="screensTrack">
+        <article class="screen-card" data-feature="dashboard">
+          <div class="screen-card__inner">
+            <div class="screen-card__device">
+              <div class="screen-card__glow" aria-hidden="true"></div>
+              <div class="app-phone">
+                <div class="app-phone__frame">
+                  <div class="app-phone__notch" aria-hidden="true"></div>
+                  <div class="app-phone__screen">
+                    <div class="pf-preview pf-preview--dashboard">
+                      <div class="pf-preview__bar"><span>9:41</span><span class="pf-preview__pill">Premium</span></div>
+                      <div class="pf-dash-welcome">
+                        <img class="pf-dash-avatar" src="https://ui-avatars.com/api/?name=Marie+L&background=22C55E&color=050505&size=128" alt="" width="72" height="72" loading="lazy">
+                        <div>
+                          <p class="pf-eyebrow">Tableau de bord · Premium</p>
+                          <h4>Bonjour Marie 👋</h4>
+                          <div class="pf-chips"><span>🔥 12 j</span><span>⚡ 1840 XP</span><span>📉 −3,2 kg</span></div>
+                        </div>
+                        <div class="pf-xp-bar"><span style="width:68%"></span></div>
+                      </div>
+                      <div class="pf-metrics">
+                        <div class="pf-metric"><strong>68,4 kg</strong><small>Poids · obj. 65</small></div>
+                        <div class="pf-metric"><strong>2 140</strong><small>kcal semaine</small></div>
+                        <div class="pf-metric"><strong>4/5</strong><small>Séances</small></div>
+                        <div class="pf-metric"><strong>142 min</strong><small>Entraînement</small></div>
+                      </div>
+                      <div class="pf-chart-bars" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span class="screen-card__tag">Vue d'ensemble</span>
+            <h3>Dashboard</h3>
+            <p>XP, streak, poids, calories et graphiques — comme dans votre espace membre.</p>
+          </div>
+        </article>
+        <article class="screen-card" data-feature="workout">
+          <div class="screen-card__inner">
+            <div class="screen-card__device">
+              <div class="screen-card__glow" aria-hidden="true"></div>
+              <div class="app-phone">
+                <div class="app-phone__frame">
+                  <div class="app-phone__notch" aria-hidden="true"></div>
+                  <div class="app-phone__screen">
+                    <div class="pf-preview pf-preview--workout">
+                      <div class="pf-preview__bar"><span>Programme</span><span class="pf-preview__pill">Séance</span></div>
+                      <div class="pf-prog-head">
+                        <div>
+                          <p class="pf-eyebrow">Aujourd'hui</p>
+                          <strong>Full Body · Force</strong>
+                        </div>
+                        <span class="pf-preview__pill">4/8</span>
+                      </div>
+                      <div class="pf-timer-ring" aria-hidden="true">18:42</div>
+                      <ul class="pf-ex-list">
+                        <li class="pf-ex-item is-done"><span class="pf-ex-check"></span> Squat barre <span class="pf-ex-meta">4×8</span></li>
+                        <li class="pf-ex-item is-active"><span class="pf-ex-check"></span> Développé couché <span class="pf-ex-meta">3×10</span></li>
+                        <li class="pf-ex-item"><span class="pf-ex-check"></span> Rowing haltères <span class="pf-ex-meta">3×12</span></li>
+                        <li class="pf-ex-item"><span class="pf-ex-check"></span> Planche <span class="pf-ex-meta">3×45s</span></li>
+                      </ul>
+                      <span class="pf-btn-mini">Valider la série</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span class="screen-card__tag">Entraînement</span>
+            <h3>Séance du jour</h3>
+            <p>Liste d'exercices, timer, repos et validation — le flux réel du programme.</p>
+          </div>
+        </article>
+        <article class="screen-card" data-feature="nutrition">
+          <div class="screen-card__inner">
+            <div class="screen-card__device">
+              <div class="screen-card__glow" aria-hidden="true"></div>
+              <div class="app-phone">
+                <div class="app-phone__frame">
+                  <div class="app-phone__notch" aria-hidden="true"></div>
+                  <div class="app-phone__screen">
+                    <div class="pf-preview pf-preview--nutrition">
+                      <div class="pf-preview__bar"><span>Nutrition</span><span class="pf-preview__pill">IA repas</span></div>
+                      <p class="pf-eyebrow">Objectif perte · 2 050 kcal</p>
+                      <div class="pf-nutri-rings">
+                        <div class="pf-nutri-ring">
+                          <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"/><circle cx="50" cy="50" r="42" fill="none" stroke="#22C55E" stroke-width="8" stroke-dasharray="264" stroke-dashoffset="72" stroke-linecap="round" transform="rotate(-90 50 50)"/></svg>
+                          <div class="pf-nutri-ring__text"><strong>1 420</strong><span>kcal</span></div>
+                        </div>
+                        <div class="pf-nutri-ring">
+                          <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"/><circle cx="50" cy="50" r="42" fill="none" stroke="#3B82F6" stroke-width="8" stroke-dasharray="264" stroke-dashoffset="95" stroke-linecap="round" transform="rotate(-90 50 50)"/></svg>
+                          <div class="pf-nutri-ring__text"><strong>118g</strong><span>prot.</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-macro-row">
+                        <div class="pf-macro"><span>Protéines 118 / 160g</span><div class="pf-macro__track"><div class="pf-macro__fill" style="width:74%;background:#3B82F6"></div></div></div>
+                        <div class="pf-macro"><span>Glucides 142 / 210g</span><div class="pf-macro__track"><div class="pf-macro__fill" style="width:68%;background:#22C55E"></div></div></div>
+                        <div class="pf-macro"><span>Lipides 38 / 65g</span><div class="pf-macro__track"><div class="pf-macro__fill" style="width:58%;background:#F59E0B"></div></div></div>
+                      </div>
+                      <div class="pf-meals">
+                        <div class="pf-meal is-done">🌅<span>OK</span></div>
+                        <div class="pf-meal is-done">☀️<span>OK</span></div>
+                        <div class="pf-meal">🌙<span>Dîner</span></div>
+                        <div class="pf-meal">🍎<span>Snack</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span class="screen-card__tag">Nutrition</span>
+            <h3>Suivi nutrition</h3>
+            <p>Anneaux kcal/macros, repas du jour et suggestions alignées sur votre objectif.</p>
+          </div>
+        </article>
+        <article class="screen-card" data-feature="coach">
+          <div class="screen-card__inner">
+            <div class="screen-card__device">
+              <div class="screen-card__glow" aria-hidden="true"></div>
+              <div class="app-phone">
+                <div class="app-phone__frame">
+                  <div class="app-phone__notch" aria-hidden="true"></div>
+                  <div class="app-phone__screen">
+                    <div class="pf-preview pf-preview--coach">
+                      <div class="pf-preview__bar"><span>Coach IA</span><span class="pf-preview__pill">Local</span></div>
+                      <div class="pf-coach-dash">
+                        <div class="pf-coach-stat"><em>🔥</em><strong>12 j</strong><small>Série</small></div>
+                        <div class="pf-coach-stat"><em>⚡</em><strong>1840</strong><small>XP</small></div>
+                        <div class="pf-coach-stat"><em>🏋️</em><strong>4/5</strong><small>Semaine</small></div>
+                      </div>
+                      <p class="pf-coach-badge">● Coach local · données réelles</p>
+                      <div class="pf-chat">
+                        <div class="pf-chat__bot">Tu n'as pas fait de séance depuis 2 jours — on enchaîne avec 25 min full body ?</div>
+                        <div class="pf-chat__user">Oui, j'ai 20 minutes ce soir</div>
+                        <div class="pf-chat__bot">Parfait : échauffement 4 min, squat + push + gainage. Je t'ajuste les séries.</div>
+                      </div>
+                      <div class="pf-chat-input" aria-hidden="true"><span></span><i></i></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span class="screen-card__tag">Intelligence</span>
+            <h3>Coach IA</h3>
+            <p>Stats, notifications et chat personnalisé sur votre poids, programme et nutrition.</p>
+          </div>
+        </article>
+        <article class="screen-card" data-feature="progress">
+          <div class="screen-card__inner">
+            <div class="screen-card__device">
+              <div class="screen-card__glow" aria-hidden="true"></div>
+              <div class="app-phone">
+                <div class="app-phone__frame">
+                  <div class="app-phone__notch" aria-hidden="true"></div>
+                  <div class="app-phone__screen">
+                    <div class="pf-preview pf-preview--progress">
+                      <div class="pf-preview__bar"><span>Journal</span><span class="pf-preview__pill">Progrès</span></div>
+                      <p class="pf-eyebrow">Évolution · 30 jours</p>
+                      <div class="pf-weight-chart" aria-hidden="true">
+                        <svg viewBox="0 0 200 80" preserveAspectRatio="none">
+                          <polyline fill="none" stroke="#22C55E" stroke-width="2.5" points="10,55 40,48 70,44 100,38 130,32 160,28 190,24"/>
+                          <circle cx="190" cy="24" r="4" fill="#22C55E"/>
+                        </svg>
+                      </div>
+                      <div class="pf-progress-stats">
+                        <div class="pf-progress-stat"><strong>−3,2 kg</strong><small>30 jours</small></div>
+                        <div class="pf-progress-stat"><strong>72%</strong><small>Objectif</small></div>
+                        <div class="pf-progress-stat"><strong>18</strong><small>Séances</small></div>
+                      </div>
+                      <div class="pf-photos">
+                        <div class="pf-photo"><label>Avant</label></div>
+                        <div class="pf-photo"><label>Après</label></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span class="screen-card__tag">Progression</span>
+            <h3>Évolution physique</h3>
+            <p>Courbe de poids, objectif et photos avant/après — comme dans le journal PulseFit.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+    <div class="screens__progress" aria-hidden="true">
+      <div class="screens__progress-bar" id="screensProgress"></div>
+    </div>
+    <div class="screens__cta-row">
+      <a href="login/" class="btn btn--primary btn--glow">Ouvrir PulseFit</a>
+      <a href="#pricing" class="btn btn--ghost">Voir les offres</a>
+    </div>
+  </section>
+
+  <section class="mobile-showcase" id="mobile-app">
+    <div class="section-header section-header--center">
+      <span class="section-tag" data-i18n="mobile_tag">App mobile · Démo</span>
+      <h2 data-i18n-html="mobile_title_html">Comme sur l'App Store,<br>utilisable dans le navigateur.</h2>
+      <p class="mobile-showcase__intro" data-i18n="mobile_intro">Connexion, onboarding, calendrier et export PDF : le parcours complet d'une app fitness premium.</p>
+    </div>
+    <div class="mobile-showcase__devices">
+      <a href="login/" class="mobile-device reveal">
+        <div class="mobile-device__frame">
+          <div class="mobile-device__screen mobile-device__screen--auth">
+            <span class="mobile-device__label">Connexion</span>
+            <div class="mobile-device__mock-form"></div>
+            <div class="mobile-device__mock-btn"></div>
+          </div>
+        </div>
+        <p data-i18n="mobile_1">Auth & démo 1 clic</p>
+      </a>
+      <a href="login/?next=calendar%2F" class="mobile-device reveal">
+        <div class="mobile-device__frame">
+          <div class="mobile-device__screen mobile-device__screen--cal">
+            <span class="mobile-device__label">Calendrier</span>
+            <div class="mobile-device__cal-grid"></div>
+          </div>
+        </div>
+        <p data-i18n="mobile_2">Planning 4 semaines</p>
+      </a>
+      <a href="login/?next=dashboard%2F%3Ftab%3Dworkout" class="mobile-device reveal">
+        <div class="mobile-device__frame">
+          <div class="mobile-device__screen mobile-device__screen--workout">
+            <span class="mobile-device__label">Séance</span>
+            <div class="mobile-device__timer">32:00</div>
+            <div class="mobile-device__lines"></div>
+          </div>
+        </div>
+        <p data-i18n="mobile_3">Chrono & log perf.</p>
+      </a>
+    </div>
+    <div class="mobile-showcase__cta reveal">
+      <a href="login/" class="btn btn--primary btn--glow" data-i18n="mobile_cta">Ouvrir l'application</a>
+      <a href="PRESENTATION.md" class="program-cta__link" download data-i18n="mobile_deck">Télécharger la fiche présentation →</a>
+    </div>
+  </section>
+
+  <!-- Vidéo démo -->
+  <section class="video-demo" id="video-demo">
+    <div class="section-header section-header--center">
+      <span class="section-tag">Démo produit</span>
+      <h2>Découvrez PulseFit<br>en action</h2>
+    </div>
+    <button class="video-demo__player" id="videoDemoTrigger" type="button" aria-label="Lancer la démo PulseFit">
+      <div class="video-demo__thumb">
+        <div class="video-demo__play">▶</div>
+        <div class="video-demo__mock">
+          <div class="video-demo__screen">
+            <span class="video-demo__line"></span>
+            <span class="video-demo__line short"></span>
+            <span class="video-demo__ring"></span>
+          </div>
+        </div>
+      </div>
+      <span>Regarder la démo interactive · 1:24</span>
+    </button>
+  </section>
+
+  <section class="program-cta" id="program-cta">
+    <div class="program-cta__card reveal">
+      <div class="section-header section-header--center">
+        <span class="section-tag" data-i18n="program_tag">Programme sur mesure</span>
+        <h2 data-i18n-html="program_title_html">Votre plan IA,<br>prêt en 30 secondes.</h2>
+      </div>
+      <p class="program-cta__text" data-i18n="program_text">Un seul configurateur intelligent pour générer entraînement, nutrition et objectifs.</p>
+      <ul class="program-cta__list">
+        <li data-i18n="program_list_1">✓ Analyse profil en temps réel</li>
+        <li data-i18n="program_list_2">✓ Programme recommandé instantanément</li>
+        <li data-i18n="program_list_3">✓ Accès direct au dashboard SaaS</li>
+      </ul>
+      <button class="btn btn--primary btn--lg btn--glow" data-action="config"><span data-i18n="program_cta">Créer mon programme IA</span></button>
+      <a href="login/" class="program-cta__link" data-i18n="program_link">Ouvrir l'application →</a>
+    </div>
+  </section>
+
+  <!-- Section 4: Dashboard progression -->
+  <section class="dashboard" id="dashboard">
+    <div class="section-header">
+      <span class="section-tag">Progression</span>
+      <h2>Vos données,<br>visualisées.</h2>
+    </div>
+    <div class="dashboard__grid">
+      <div class="chart-card">
+        <div class="chart-card__head">
+          <span>Poids</span>
+          <strong class="chart-card__metric" data-count="72.4">0</strong>
+          <span class="chart-card__unit">kg</span>
+        </div>
+        <div class="chart-card__meta-row">
+          <span>82 kg</span>
+          <span class="chart-card__trend">-4 kg en 8 semaines</span>
+          <span>78 kg</span>
+        </div>
+        <canvas id="chartWeight" height="120"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card__head">
+          <span>Calories</span>
+          <strong class="chart-card__metric" data-count="18420">0</strong>
+          <span class="chart-card__unit">ce mois</span>
+        </div>
+        <div class="chart-card__mini-labels">
+          <span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span><span>Sam</span><span>Dim</span>
+        </div>
+        <canvas id="chartCalories" height="120"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card__head">
+          <span>Séances terminées</span>
+          <strong class="chart-card__metric" data-count="47">0</strong>
+        </div>
+        <ul class="session-list">
+          <li><span class="session-list__check">✓</span> Full Body <small>42 min</small></li>
+          <li><span class="session-list__check">✓</span> Cardio Blast <small>30 min</small></li>
+          <li><span class="session-list__check">✓</span> HIIT Core <small>24 min</small></li>
+          <li><span class="session-list__check">✓</span> Mobilité <small>18 min</small></li>
+        </ul>
+        <canvas id="chartSessions" height="90"></canvas>
+      </div>
+      <div class="chart-card chart-card--goals">
+        <div class="chart-card__head">
+          <span>Objectifs atteints</span>
+          <strong class="chart-card__metric" data-count="89">0</strong>
+          <span class="chart-card__unit">%</span>
+        </div>
+        <div class="goals-ring">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="42" fill="none" stroke="#171717" stroke-width="6"/>
+            <circle class="goals-ring__progress" cx="50" cy="50" r="42" fill="none" stroke="#22C55E" stroke-width="6" stroke-dasharray="264" stroke-dashoffset="29" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+          </svg>
+          <span class="goals-ring__label">8/9</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why" id="why">
+    <div class="section-header section-header--center">
+      <span class="section-tag">Méthode PulseFit</span>
+      <h2>Pourquoi PulseFit<br>fonctionne vraiment.</h2>
+    </div>
+    <div class="why__grid">
+      <article class="why-card">
+        <h3>Programmes adaptés à votre niveau</h3>
+        <p>L’IA ajuste l’intensité, le volume et la récupération selon vos performances réelles.</p>
+      </article>
+      <article class="why-card">
+        <h3>Nutrition personnalisée</h3>
+        <p>Plans de repas dynamiques basés sur vos objectifs, vos contraintes et votre rythme de vie.</p>
+      </article>
+      <article class="why-card">
+        <h3>Motivation quotidienne</h3>
+        <p>Rappels ciblés et coaching intelligent pour garder une régularité durable.</p>
+      </article>
+      <article class="why-card">
+        <h3>Analyse automatique des progrès</h3>
+        <p>Détection des plateaux et réajustement automatique du plan pour continuer à progresser.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Section 5: IA bubbles -->
+  <section class="ai-features" id="ai">
+    <div class="section-header section-header--center">
+      <span class="section-tag">Intelligence artificielle</span>
+      <h2>Un écosystème IA<br>qui vous comprend.</h2>
+    </div>
+    <div class="ai-bubbles">
+      <svg class="ai-bubbles__lines" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet">
+        <line x1="400" y1="250" x2="200" y2="120" class="ai-line"/>
+        <line x1="400" y1="250" x2="600" y2="120" class="ai-line"/>
+        <line x1="400" y1="250" x2="150" y2="350" class="ai-line"/>
+        <line x1="400" y1="250" x2="650" y2="350" class="ai-line"/>
+        <line x1="400" y1="250" x2="400" y2="80" class="ai-line"/>
+      </svg>
+      <div class="ai-bubble ai-bubble--center">
+        <div class="ai-bubble__core">IA</div>
+        <span>PulseFit Engine</span>
+      </div>
+      <div class="ai-bubble" data-pos="1">
+        <span class="ai-bubble__icon">📋</span>
+        <strong>Programme personnalisé</strong>
+        <p>Adapté à votre morphologie et historique</p>
+      </div>
+      <div class="ai-bubble" data-pos="2">
+        <span class="ai-bubble__icon">🥗</span>
+        <strong>Repas adaptés</strong>
+        <p>Suggestions nutritionnelles intelligentes</p>
+      </div>
+      <div class="ai-bubble" data-pos="3">
+        <span class="ai-bubble__icon">📊</span>
+        <strong>Analyse des progrès</strong>
+        <p>Détection des tendances et plateaux</p>
+      </div>
+      <div class="ai-bubble" data-pos="4">
+        <span class="ai-bubble__icon">⚙️</span>
+        <strong>Ajustement automatique</strong>
+        <p>Charge et volume recalibrés chaque semaine</p>
+      </div>
+      <div class="ai-bubble" data-pos="5">
+        <span class="ai-bubble__icon">💬</span>
+        <strong>Motivation quotidienne</strong>
+        <p>Messages et rappels personnalisés</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partenaires -->
+  <section class="partners" id="partners">
+    <div class="section-header section-header--center">
+      <span class="section-tag">Écosystème connecté</span>
+      <h2>Ils s'intègrent à PulseFit</h2>
+    </div>
+    <div class="partners__grid">
+      <div class="partner-logo">Apple Health</div>
+      <div class="partner-logo">Google Fit</div>
+      <div class="partner-logo">Fitbit</div>
+      <div class="partner-logo">Garmin</div>
+    </div>
+  </section>
+
+  <!-- Section finale -->
+  <section class="cta-final" id="cta">
+    <div class="cta-final__bg">
+      <div class="phone-mockup phone-mockup--final">
+        <div class="phone-mockup__frame">
+          <div class="phone-mockup__notch"></div>
+          <div class="phone-mockup__screen">
+            <div class="app-ui app-ui--minimal">
+              <div class="app-ui__logo-big">◉</div>
+              <strong>PulseFit</strong>
+              <p>Prêt à transformer votre corps ?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cta-final__content">
+      <h2>Commencez votre transformation<br><span class="gradient-text">aujourd'hui.</span></h2>
+      <button class="btn btn--primary btn--lg btn--glow" data-action="config">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Créer mon programme IA
+      </button>
+      <p class="cta-final__stores">Disponible sur iOS et Android</p>
+    </div>
+  </section>
+
+  <aside class="sticky-cta" id="stickyCta" aria-hidden="true">
+    <button class="sticky-cta__close" id="stickyClose" type="button" aria-label="Fermer">×</button>
+    <p data-i18n="sticky_text">Commencez votre transformation aujourd'hui</p>
+    <button class="btn btn--primary btn--glow" data-action="config" data-i18n="nav_cta">Créer mon programme IA</button>
+  </aside>
+
+  <footer class="footer">
+    <span>© 2026 PulseFit</span>
+    <a href="login/" class="footer__link" data-i18n="footer_dashboard">Ouvrir l'application →</a>
+    <span class="footer__tag" data-i18n="footer_tag">Application fictive · Portfolio</span>
+  </footer>
+
+  <div class="config-modal" id="configModal" hidden>
+    <div class="config-modal__backdrop" data-close-config></div>
+    <div class="config-modal__panel" role="dialog" aria-modal="true" aria-labelledby="configTitle">
+      <button class="config-modal__close" id="configClose" aria-label="Fermer">✕</button>
+      <div class="config-modal__head">
+        <span class="section-tag">PulseFit Configurator</span>
+        <h3 id="configTitle" data-i18n="config_title">Créez votre programme IA</h3>
+        <div class="config-modal__progress">
+          <div class="config-modal__progress-fill" id="configProgress"></div>
+        </div>
+      </div>
+      <div class="config-modal__content" id="configContent"></div>
+    </div>
+  </div>
+
+  <div class="video-modal" id="videoModal" hidden>
+    <div class="video-modal__backdrop" data-close-video></div>
+    <div class="video-modal__panel">
+      <button class="config-modal__close" data-close-video aria-label="Fermer">✕</button>
+      <h3>Démo PulseFit · Coach IA</h3>
+      <div class="video-modal__demo" id="videoModalDemo">
+        <div class="demo-screen">
+          <div class="demo-screen__top"><span>09:41</span><span>◉ PulseFit</span></div>
+          <div class="demo-screen__card active" data-demo="0">
+            <h4>Dashboard</h4>
+            <p>Objectif du jour : 78%</p>
+            <div class="demo-bar"><span style="width:78%"></span></div>
+          </div>
+          <div class="demo-screen__card" data-demo="1">
+            <h4>Séance IA</h4>
+            <p>HIIT personnalisé · 32 min</p>
+            <button type="button">Démarrer</button>
+          </div>
+          <div class="demo-screen__card" data-demo="2">
+            <h4>Nutrition</h4>
+            <p>Macros optimisées par l'IA</p>
+            <div class="demo-macros"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="pulsefit-store.js"></script>
+  <script src="pulsefit-auth.js"></script>
+  <script src="js/pulsefit-user-display.js"></script>
+  <script src="locales.js"></script>
+  <script src="js/nav-user.js"></script>
+  <script src="js/landing-personalize.js"></script>
+  <script src="js/hero.js"></script>
+  <script src="js/landing-screens.js"></script>
+  <script src="js/pwa-install.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
